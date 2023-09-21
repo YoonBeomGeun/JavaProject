@@ -1,0 +1,313 @@
+package chat_01;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.util.Random;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+class CClient extends JFrame {
+	Socket socket = new Socket();
+	InputStream is = null;
+	InputStreamReader isr = null;
+	BufferedReader br = null;
+	OutputStream os = null;
+	OutputStreamWriter osw = null;
+	PrintWriter pw = null;
+	private JTextField tf = new JTextField();
+	private JTextArea ta = new JTextArea();
+	private JTextArea ta2 = new JTextArea("    ̿    ּż       մϴ !");
+	private JTextArea ta3 = new JTextArea("     777                      !\n       < Ϸ翡  ѹ          >");
+	private JTextArea ta4 = new JTextArea("          : 21.0.6");
+	private JTextArea ta5 = new JTextArea();
+	private JTextArea ta6 = new JTextArea("	< ̿    Ģ>\n\n1.  ٸ                ϱ \n\n2.  г       ڽ     ̸      ϱ \n\n3.  ̺ Ʈ    Ϸ翡  ѹ        ");
+	private JScrollPane js = new JScrollPane(ta);
+	private JButton btn = new JButton("ä        ϱ ");
+	private JButton btn1 = new JButton("      ");
+	private JButton btn2 = new JButton(" ޴ ");
+	private JButton btn3 = new JButton(" ̺ Ʈ");
+	private JButton btn4 = new JButton("    ");
+	private JButton btn5 = new JButton("    ");
+	private JButton btn6 = new JButton(" ڷ ");
+	private JButton btn7 = new JButton("      ̱ !");
+	private JButton btn8 = new JButton(" ̿    Ģ");
+
+	Image img = new ImageIcon("C:\\img.jpg").getImage();
+
+	CClient() {
+		setTitle("      ä  ");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(null);
+		js.setBounds(0, 0, 410, 280);
+		tf.setBounds(0, 280, 500, 30);
+		ta2.setBounds(0,0,500,350);
+		ta3.setBounds(100,80,305,100);
+		ta4.setBounds(150,120,200,70);
+		ta5.setBounds(220,190,300,100);
+		ta6.setBounds(60,40,300,250);
+		btn.setBounds(0, 0, 500, 50);
+		btn1.setBounds(410, 0, 80, 30);
+		btn2.setBounds(410, 30, 80, 30);
+		btn5.setBounds(410, 30, 80, 30);
+		btn3.setBounds(180, 120, 130, 50);
+		btn4.setBounds(180, 200, 130, 50);
+		btn8.setBounds(180, 40, 130, 50);
+		btn6.setBounds(410, 30, 80, 30);
+		btn7.setBounds(170, 140, 150, 40);
+		
+		add(js);
+		add(tf);
+		add(ta2);
+		add(btn);
+		add(btn1);
+		add(btn2);
+		add(btn3);
+		add(btn4);
+		add(btn5);
+		add(btn6);
+		add(btn7);
+		add(btn8);
+		add(ta3);
+		add(ta4);
+		add(ta5);
+		add(ta6);
+		btn.setFont(new Font("Gothic", Font.ITALIC, 20));
+		btn7.setFont(new Font("    ", Font.BOLD, 15));
+		btn3.setFont(new Font("    ", Font.BOLD, 15));
+		btn4.setFont(new Font("    ", Font.BOLD, 15));
+		btn8.setFont(new Font("    ", Font.BOLD, 15));
+		ta2.setFont(new Font("Gothic", Font.ITALIC, 35));
+		ta3.setFont(new Font("Gothic", Font.ITALIC, 20));
+		ta4.setFont(new Font("Gothic", Font.ITALIC, 25));
+		ta6.setFont(new Font("Gothic", Font.ITALIC, 20));
+		ta5.setFont(new Font("    ", Font.BOLD, 30));
+		
+		
+		ta.setBackground(Color.cyan);
+		ta2.setBackground(Color.YELLOW);
+
+		tf.setVisible(false);
+		ta2.setVisible(false);
+		js.setVisible(false);
+		btn1.setVisible(false);
+		btn2.setVisible(false);
+		btn3.setVisible(false);
+		btn4.setVisible(false);
+		btn5.setVisible(false);btn6.setVisible(false);btn7.setVisible(false);btn8.setVisible(false);
+		ta3.setVisible(false); ta4.setVisible(false);ta5.setVisible(false);ta6.setVisible(false);
+
+		setSize(500, 350);
+		setVisible(true);
+
+		btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String str = btn.getText();
+				if (str == "ä        ϱ ") {
+					js.setVisible(true);
+					tf.setVisible(true);
+					ta.setVisible(true);
+					btn1.setVisible(true);
+					btn.setVisible(false);
+					btn2.setVisible(true);
+
+				}
+			}
+		});
+
+		btn1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String str = btn1.getText();
+				try {
+					if (str == "      ") {
+						socket.close();
+						js.setVisible(false);
+						tf.setVisible(false);
+						ta2.setVisible(true);
+						btn1.setVisible(false);
+						btn.setVisible(false);
+						btn2.setVisible(false);
+					}
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}	
+			}
+		});
+
+		btn2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String str = btn2.getText();
+				if (str == " ޴ ") {
+					js.setVisible(false);
+					tf.setVisible(false);
+					btn1.setVisible(false);
+					btn.setVisible(false);
+					btn2.setVisible(false);
+					btn3.setVisible(true);
+					btn4.setVisible(true);
+					btn5.setVisible(true);
+					btn8.setVisible(true);
+				}
+			}
+		});
+		
+		btn5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String str = btn5.getText();
+				if (str == "    ") {
+					js.setVisible(true);
+					tf.setVisible(true);
+					btn1.setVisible(true);
+					btn2.setVisible(true);
+					btn3.setVisible(false);
+					btn4.setVisible(false);
+					btn5.setVisible(false);
+					btn8.setVisible(false);
+					
+				}
+			}
+		});
+		
+		btn3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String str = btn3.getText();
+				if (str == " ̺ Ʈ") {
+					ta3.setVisible(true);
+					btn5.setVisible(false);
+					btn6.setVisible(true);
+					btn7.setVisible(true);
+					btn3.setVisible(false);
+					btn4.setVisible(false);
+					btn8.setVisible(false);
+				}
+			}
+		});
+		
+		btn4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String str = btn4.getText();
+				if (str == "    ") {
+					btn6.setVisible(true);
+					btn3.setVisible(false);
+					btn4.setVisible(false);
+					btn5.setVisible(false);
+					ta4.setVisible(true);
+					btn8.setVisible(false);
+				}
+			}
+		});
+		
+		btn8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String str = btn8.getText();
+				if (str == " ̿    Ģ") {
+					ta3.setVisible(false);
+					btn5.setVisible(false);
+					btn6.setVisible(true);
+					ta6.setVisible(true);
+					btn3.setVisible(false);
+					btn4.setVisible(false);
+					btn8.setVisible(false);
+				}
+			}
+		});
+		
+		btn6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String str = btn6.getText();
+				if (str == " ڷ ") {
+					btn6.setVisible(false);
+					btn3.setVisible(true);
+					btn4.setVisible(true);
+					btn5.setVisible(true);
+					btn8.setVisible(true);
+					ta3.setVisible(false);
+					ta4.setVisible(false);
+					ta5.setVisible(false);
+					ta6.setVisible(false);
+					btn7.setVisible(false);
+				}
+			}
+		});
+		
+		btn7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String str = btn7.getText();
+				int x;
+				Random rand = new Random();
+				if (str == "      ̱ !") {
+					x=rand.nextInt(1000);
+					ta5.setText(Integer.toString(x));
+					ta5.setVisible(true);
+				}
+			}
+		});
+
+		tf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String str = tf.getText();
+				tf.setText("");
+				pw.println(str);
+				pw.flush();
+			}
+		});
+		try {
+			socket.connect(new InetSocketAddress("192.168.0.156", 5432));
+			System.out.println("            ߽  ϴ .");
+			is = socket.getInputStream();
+			isr = new InputStreamReader(is, "UTF-8");
+			br = new BufferedReader(isr);
+			os = socket.getOutputStream();
+			osw = new OutputStreamWriter(os, "UTF-8");
+			pw = new PrintWriter(osw, true);
+			while (true) {
+				String data = br.readLine();
+				ta.append(data + "\n");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (socket != null && !socket.isClosed()) {
+					socket.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void paint(Graphics g) {
+		paintComponents(g);
+		g.drawImage(img, 0, 0, null);
+	}
+}
+
+public class ChatClient {
+	public static void main(String[] args) {
+		new CClient();
+	}
+}
