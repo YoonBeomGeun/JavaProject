@@ -1,4 +1,4 @@
-package chat_01;
+package chat_01;	//수정 필요
 
 import java.awt.BorderLayout;
 import java.awt.Color;
